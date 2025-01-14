@@ -14,7 +14,7 @@ import { AuthContext } from "@/authProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ const Register = () => {
     console.log(data.email);
     createUser(data.email, data.password)
       .then(() => {
-        // updateUser(name, imageURL);
+        updateUser(data.name, data.imageURL);
         toast.success("Registration Successful!");
         reset();
         // console.log(res);
