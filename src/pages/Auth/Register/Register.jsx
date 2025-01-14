@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "../../provider/AuthProvider";
-// import toast from "react-hot-toast";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,34 +10,34 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm, Controller } from "react-hook-form";
-
-// import AxiosSecure from "../../hooks/AxiosSecure";
+import { AuthContext } from "@/authProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  //   const { createUserWithEmail, updateUser } = useContext(AuthContext);
-  //   const useAxios = AxiosSecure();
+  const { createUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     control,
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    /*  createUserWithEmail(email, password)
+    console.log(data.email);
+    createUser(data.email, data.password)
       .then(() => {
-        updateUser(name, imageURL);
+        // updateUser(name, imageURL);
         toast.success("Registration Successful!");
-        form.reset();
+        reset();
         // console.log(res);
-        useAxios.post("/users", user);
+        // useAxios.post("/users", user);
         // .then((res) => console.log(res.data));
       })
       .catch((error) => {
         toast.error(error.message);
-      }); */
+      });
   };
   return (
     <>
