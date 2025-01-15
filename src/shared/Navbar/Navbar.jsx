@@ -13,9 +13,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <>
       <nav className="border-b shadow-sm">
@@ -58,7 +59,10 @@ const Navbar = () => {
                     <Link to="/dashboard">
                       <DropdownMenuItem>Dashboard</DropdownMenuItem>
                     </Link>
-                    <DropdownMenuItem className="text-primary">
+                    <DropdownMenuItem
+                      onClick={() => logOut()}
+                      className="text-primary"
+                    >
                       <LogOut /> Log out
                     </DropdownMenuItem>
                   </DropdownMenuContent>

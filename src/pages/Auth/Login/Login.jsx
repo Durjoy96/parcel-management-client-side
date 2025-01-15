@@ -1,25 +1,25 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import { Button } from "@/components/ui/button";
-// import { AuthContext } from "../../provider/AuthProvider";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import { AuthContext } from "@/authProvider/AuthProvider";
 
 const Login = () => {
-  // const { signInWithEmail } = useContext(AuthContext);
+  const { signInWithPassword } = useContext(AuthContext);
   const formHandler = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    /* signInWithEmail(email, password)
+    signInWithPassword(email, password)
       .then(() => {
         toast.success("login Successfully!");
         form.reset();
       })
       .catch((error) => {
         toast.error(error.message);
-      }); */
+      });
   };
   return (
     <>
