@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import { Button } from "@/components/ui/button";
@@ -12,9 +12,14 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { AuthContext } from "@/authProvider/AuthProvider";
 import toast from "react-hot-toast";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import AxiosPublic from "@/hooks/AxiosPublic/AxiosPublic";
 
 const Register = () => {
+  const [imagePath, setImagePath] = useState("");
   const { createUser, updateUser } = useContext(AuthContext);
+  const useAxios = AxiosPublic();
   const {
     register,
     handleSubmit,
@@ -24,20 +29,40 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(data.email);
-    createUser(data.email, data.password)
-      .then(() => {
-        updateUser(data.name, data.imageURL);
-        toast.success("Registration Successful!");
-        reset();
-        // console.log(res);
-        // useAxios.post("/users", user);
-        // .then((res) => console.log(res.data));
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    //get image url
+    const formData = new FormData();
+    formData.append("image", data.imageURL[0]);
+    fetch(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbbApiKey}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setImagePath(() => data.data.display_url));
+
+    if (imagePath) {
+      createUser(data.email, data.password)
+        .then(() => {
+          console.log(imagePath);
+          updateUser(data.name, imagePath);
+          reset();
+          // console.log(res);
+          const user = {
+            name: data.name,
+            email: data.email,
+            role: data.role,
+          };
+          useAxios.post("/users", user).then((res) => {
+            console.log(res.data);
+            toast.success("Registration Successful!");
+          });
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    }
   };
   return (
     <>
@@ -82,19 +107,17 @@ const Register = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm">
-                  Image URL
-                </label>
-                <input
-                  type="text"
-                  name="imageURL"
-                  {...register("imageURL", { required: true })}
-                  placeholder="https://example.com"
-                  className="w-full px-3 py-2 border rounded-md dark:border-none dark:bg-[#4e4e4e] dark:text-white/60"
-                />
-                {errors.imageURL && (
-                  <span className="text-red-500">This field is required</span>
-                )}
+                <div className="grid w-full max-w-sm items-center gap-1.5">
+                  <Label htmlFor="picture" className="font-normal mb-1">
+                    Picture
+                  </Label>
+                  <Input
+                    name="imageURL"
+                    {...register("imageURL")}
+                    id="picture"
+                    type="file"
+                  />
+                </div>
               </div>
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm">

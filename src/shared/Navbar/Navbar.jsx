@@ -20,14 +20,14 @@ const Navbar = () => {
     <>
       <nav className="border-b shadow-sm">
         <div className="main-container py-3 flex justify-between items-center">
-          <div className="flex items-center gap-1">
+          <Link to="/" className="flex items-center gap-1">
             <div className="w-7 lg:w-10">
               <img src={LogoPng} alt="proyojon" />
             </div>
             <h2 className="text-primary text-lg md:text-xl lg:text-2xl font-bold">
               Proyojon
             </h2>
-          </div>
+          </Link>
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             {/* Home page */}
             <NavLink to="/" className="flex items-center gap-1">
@@ -46,7 +46,8 @@ const Navbar = () => {
                     <Avatar className="hover:outline hover:outline-1 hover:outline-primary hover:outline-offset-2">
                       <AvatarImage src={user?.photoURL} />
                       <AvatarFallback>
-                        {user?.displayName.slice(0, 2).toUpperCase()}
+                        {user?.displayName &&
+                          user?.displayName.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>

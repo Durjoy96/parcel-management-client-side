@@ -1,19 +1,24 @@
+import { AuthContext } from "@/authProvider/AuthProvider";
+import AxiosPublic from "@/hooks/AxiosPublic/AxiosPublic";
 import { useContext } from "react";
-// import { AuthContext } from "../../provider/AuthProvider";
-// import AxiosSecure from "../../hooks/AxiosSecure";
+import toast from "react-hot-toast";
 
 const GoogleLogin = () => {
-  //   const { googleSignIn } = useContext(AuthContext);
-  //   const useAxios = AxiosSecure();
+  const { googleSignIn } = useContext(AuthContext);
+  const useAxios = AxiosPublic();
   const btnHandler = () => {
     googleSignIn().then((res) => {
       // console.log(res.user.displayName);
       // console.log(res);
+      toast.success("Sign in Successfully!");
       const user = {
         name: res.user.displayName,
         email: res.user.email,
+        role: "user",
       };
-      //   useAxios.post("/users", user).then((res) => console.log(res.data));
+      useAxios.post("/users", user).then((res) => {
+        console.log(res.data);
+      });
     });
   };
   return (
