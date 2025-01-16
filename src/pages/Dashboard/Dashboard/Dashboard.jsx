@@ -205,7 +205,7 @@ const Dashboard = () => {
           </Sidebar>
           <SidebarTrigger />
         </SidebarProvider>
-        <div className="mt-6 md:mt-10 lg:my-12 px-6 py-12 bg-base-100 rounded-lg shadow-md">
+        <div className="mt-6 md:mt-10 lg:my-12 px-6 pt-6 pb-12 bg-base-100 rounded-lg shadow-md">
           <Outlet />
         </div>
       </section>

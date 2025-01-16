@@ -1,13 +1,21 @@
 import { AuthContext } from "@/authProvider/AuthProvider";
+import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
+import Spinner from "@/components/custom/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Send, SendHorizonal } from "lucide-react";
+import AxiosSecure from "@/hooks/AxiosSecure/AxiosSecure";
+import { SendHorizonal } from "lucide-react";
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const BookParcel = () => {
   const { user } = useContext(AuthContext);
   const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const useAxios = AxiosSecure();
+
   const priceHandler = (e) => {
     const value = Number(e.target.value);
     if (value <= 0) {
@@ -20,22 +28,55 @@ const BookParcel = () => {
       setCalculatedPrice(150);
     }
   };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    setLoading(true); //start the spinner on the Book Now Button
+    data.price = calculatedPrice;
+    data.status = "pending";
+    console.log(data);
+    useAxios
+      .post("/book-parcel", data)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          setLoading(false);
+          toast.success("Parcel Added Successfully!");
+          reset();
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <div>
         <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
           Book a Parcel
         </h2>
-        <form className="mt-12">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* name */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="name" className="text-base-content">
-                Name
+                Your Name
               </Label>
               <Input
                 type="name"
                 name="name"
+                {...register("name")}
                 placeholder="name"
                 defaultValue={user?.displayName}
                 readOnly
@@ -44,11 +85,12 @@ const BookParcel = () => {
             {/* email */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="email" className="text-base-content">
-                Email
+                Your Email
               </Label>
               <Input
                 type="email"
                 name="email"
+                {...register("email")}
                 placeholder="Email"
                 defaultValue={user?.email}
                 readOnly
@@ -59,23 +101,34 @@ const BookParcel = () => {
               <Label htmlFor="phoneNumber" className="text-base-content">
                 Phone Number
               </Label>
-              <Input type="tel" name="phoneNumber" placeholder="Phone Number" />
+              <Input
+                type="tel"
+                name="phoneNumber"
+                {...register("phoneNumber")}
+                placeholder="Phone Number"
+              />
             </div>
             {/* Parcel Type */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="parcelType" className="text-base-content">
+              <Label htmlFor="type" className="text-base-content">
                 Parcel Type
               </Label>
-              <Input type="text" name="parcelType" placeholder="Parcel Type" />
+              <Input
+                type="text"
+                name="type"
+                {...register("type")}
+                placeholder="Parcel Type"
+              />
             </div>
             {/* Parcel Weight */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="parcelWeight" className="text-base-content">
+              <Label htmlFor="weight" className="text-base-content">
                 Parcel Weight (Kg)
               </Label>
               <Input
                 type="number"
-                name="parcelWeight"
+                name="weight"
+                {...register("weight")}
                 placeholder="Parcel Weight"
                 onChange={priceHandler}
               />
@@ -88,76 +141,67 @@ const BookParcel = () => {
               <Input
                 type="text"
                 name="receiversName"
+                {...register("receiversName")}
                 placeholder="Receiver’s Name"
               />
             </div>
             {/* Receiver's Phone Number */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label
-                htmlFor="receiversPhoneNumber"
-                className="text-base-content"
-              >
+              <Label htmlFor="phoneNumber" className="text-base-content">
                 Receiver's Phone Number
               </Label>
               <Input
                 type="text"
-                name="receiversPhoneNumber"
+                name="phoneNumber"
+                {...register("phoneNumber")}
                 placeholder="Receiver's Phone Number"
               />
             </div>
             {/* Parcel Delivery Address */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label
-                htmlFor="parcelDeliveryAddress"
-                className="text-base-content"
-              >
+              <Label htmlFor="deliveryAddress" className="text-base-content">
                 Parcel Delivery Address
               </Label>
               <Input
                 type="text"
-                name="parcelDeliveryAddress"
+                name="deliveryAddress"
+                {...register("deliveryAddress")}
                 placeholder="Parcel Delivery Address"
               />
             </div>
             {/* Requested Delivery Date */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label
-                htmlFor="requestedDeliveryDate"
-                className="text-base-content"
-              >
+              <Label htmlFor="deliveryDate" className="text-base-content">
                 Requested Delivery Date
               </Label>
               <Input
                 type="date"
-                name="requestedDeliveryDate"
+                name="deliveryDate"
+                {...register("deliveryDate")}
                 placeholder="Requested Delivery Date"
               />
             </div>
             {/* Delivery Address Latitude */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label
-                htmlFor="deliveryAddressLatitude"
-                className="text-base-content"
-              >
+              <Label htmlFor="latitude" className="text-base-content">
                 Delivery Address Latitude
               </Label>
               <Input
-                type="number"
-                name="deliveryAddressLatitude"
+                type="text"
+                name="latitude"
+                {...register("latitude")}
                 placeholder="Delivery Address Latitude"
               />
             </div>
             {/* Delivery Address longitude */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label
-                htmlFor="deliveryAddressLongitude"
-                className="text-base-content"
-              >
+              <Label htmlFor="longitude" className="text-base-content">
                 Delivery Address Longitude
               </Label>
               <Input
-                type="number"
-                name="deliveryAddressLongitude"
+                type="text"
+                name="longitude"
+                {...register("longitude")}
                 placeholder="Delivery Address Longitude"
               />
             </div>
@@ -172,7 +216,6 @@ const BookParcel = () => {
               </span>
             </div>
             <Button>
-              {" "}
               <SendHorizonal /> Book Now!
             </Button>
           </div>
