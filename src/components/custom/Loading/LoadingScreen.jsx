@@ -1,4 +1,4 @@
-import LoadingAnimation from "../../assets/Lottie/loading.json";
+import LoadingAnimation from "../../../assets/Lottie/loading.json";
 import Lottie from "lottie-react";
 
 const LoadingScreen = () => {

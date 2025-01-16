@@ -134,8 +134,8 @@ const Register = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="user">User</SelectItem>
-                        <SelectItem value="deliveryMan">
-                          Delivery Man
+                        <SelectItem value="deliveryMen">
+                          Delivery Men
                         </SelectItem>
                       </SelectContent>
                     </Select>

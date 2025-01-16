@@ -1,4 +1,6 @@
 import { auth } from "@/firebase/firebase.config";
+import AxiosPublic from "@/hooks/AxiosPublic/AxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -15,6 +17,8 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState();
+  const useAxios = AxiosPublic();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -56,6 +60,17 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  const {} = useQuery({
+    enabled: !!user?.email,
+    queryKey: ["userRole", user?.email],
+    queryFn: async () => {
+      const res = await useAxios.get(`/user?email=${user.email}`);
+      console.log(res.data.role);
+      setRole(res.data.role);
+      return res.data;
+    },
+  });
+
   const authInfo = {
     createUser,
     user,
@@ -64,6 +79,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     signInWithPassword,
     logOut,
+    role,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
