@@ -32,7 +32,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Link, Navigate, NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import LogoPng from "../../../assets/images/logo.png";
 import {
@@ -105,19 +112,14 @@ const items = [
 
 const Dashboard = () => {
   const { user, role } = useContext(AuthContext);
-  console.log(role);
   const roleBasedItems = items.filter((item) => item.role === role);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const path = roleBasedItems[0].url;
-    navigate(`/dashboard/${path}`);
-  }, []);
 
   return (
     <>
-      <section className="bg-base-200 grid grid-cols-[.1fr_1fr_.02fr] gap-6 md:gap-10 lg:gap-12">
+      {roleBasedItems && roleBasedItems.length > 0 && (
+        <Navigate to={`/dashboard/${roleBasedItems[0].url}`} replace />
+      )}
+      <section className="bg-base-200 grid grid-cols-[.1fr_1fr_.02fr] items-start gap-6 md:gap-10 lg:gap-12">
         <SidebarProvider>
           <Sidebar>
             <SidebarHeader>
@@ -203,7 +205,7 @@ const Dashboard = () => {
           </Sidebar>
           <SidebarTrigger />
         </SidebarProvider>
-        <div className="mt-6 md:mt-10 lg:my-12 p-6 bg-base-100 rounded-xl shadow-md">
+        <div className="mt-6 md:mt-10 lg:my-12 px-6 py-12 bg-base-100 rounded-lg shadow-md">
           <Outlet />
         </div>
       </section>
