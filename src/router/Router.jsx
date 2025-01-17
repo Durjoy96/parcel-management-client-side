@@ -12,6 +12,7 @@ import Update from "@/pages/Dashboard/Users/MyParcels/Update";
 import MyProfile from "@/pages/Dashboard/Users/MyProfile/MyProfile";
 import AdminRoute from "@/private/AdminRoute";
 import Statistics from "@/pages/Dashboard/Admin/Statistics/Statistics";
+import AllParcels from "@/pages/Dashboard/Admin/AllParcels/AllParcels";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,14 @@ export const router = createBrowserRouter([
             element: (
               <AdminRoute>
                 <Statistics />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "all-parcels",
+            element: (
+              <AdminRoute>
+                <AllParcels />
               </AdminRoute>
             ),
           },
