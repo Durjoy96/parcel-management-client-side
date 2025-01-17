@@ -1,6 +1,5 @@
 import { AuthContext } from "@/authProvider/AuthProvider";
 import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
-import Spinner from "@/components/custom/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -159,13 +158,13 @@ const BookParcel = () => {
             </div>
             {/* Receiver's Phone Number */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="phoneNumber" className="text-base-content">
+              <Label htmlFor="ReceiversPhoneNumber" className="text-base-content">
                 Receiver's Phone Number
               </Label>
               <Input
                 type="text"
-                name="phoneNumber"
-                {...register("phoneNumber")}
+                name="ReceiversPhoneNumber"
+                {...register("ReceiversPhoneNumber")}
                 placeholder="+1 987 654 3210"
               />
             </div>

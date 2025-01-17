@@ -21,11 +21,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import { Link } from "react-router-dom";
+import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 
 const MyParcels = () => {
   const useAxios = AxiosSecure();
   const { user } = useContext(AuthContext);
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], isLoading } = useQuery({
     queryKey: ["parcels", user?.email],
     queryFn: async () => {
       const res = await useAxios.get(`/parcels?email=${user.email}`);
@@ -33,6 +34,10 @@ const MyParcels = () => {
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
