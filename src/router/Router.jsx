@@ -10,6 +10,8 @@ import BookParcel from "@/pages/Dashboard/Users/BookParcel/BookParcel";
 import MyParcels from "@/pages/Dashboard/Users/MyParcels/MyParcels";
 import Update from "@/pages/Dashboard/Users/MyParcels/Update";
 import MyProfile from "@/pages/Dashboard/Users/MyProfile/MyProfile";
+import AdminRoute from "@/private/AdminRoute";
+import Statistics from "@/pages/Dashboard/Admin/Statistics/Statistics";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +69,14 @@ export const router = createBrowserRouter([
               <PrivateRoute>
                 <MyProfile />
               </PrivateRoute>
+            ),
+          },
+          {
+            path: "statistics",
+            element: (
+              <AdminRoute>
+                <Statistics />
+              </AdminRoute>
             ),
           },
         ],
