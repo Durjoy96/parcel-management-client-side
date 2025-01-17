@@ -41,7 +41,17 @@ const BookParcel = () => {
     setLoading(true); //start the spinner on the Book Now Button
     data.price = calculatedPrice;
     data.status = "pending";
-    console.log(data);
+
+    const date = new Date();
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    data.bookingDate = date.toLocaleDateString(undefined, options);
+
     useAxios
       .post("/book-parcel", data)
       .then((res) => {
