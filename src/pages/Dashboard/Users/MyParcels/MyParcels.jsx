@@ -22,6 +22,7 @@ import {
 import { Ellipsis } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
+import Swal from "sweetalert2";
 
 const MyParcels = () => {
   const useAxios = AxiosSecure();
@@ -38,6 +39,28 @@ const MyParcels = () => {
   if (isLoading) {
     return <LoadingScreen />;
   }
+
+  const cancelBtnHandler = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        useAxios.patch(`/parcel?id=${id}`, {}).then((res) => {
+          Swal.fire({
+            title: "Canceled!",
+            text: "Your parcel has been canceled.",
+            icon: "success",
+          });
+        });
+      }
+    });
+  };
 
   return (
     <>
@@ -85,7 +108,11 @@ const MyParcels = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem>Review</DropdownMenuItem>
                       <DropdownMenuItem>Pay</DropdownMenuItem>
-                      <DropdownMenuItem className="text-primary">
+                      <DropdownMenuItem
+                        disabled={parcel?.status !== "pending"}
+                        onClick={() => cancelBtnHandler(parcel?._id)}
+                        className="text-primary cursor-pointer"
+                      >
                         Cancel
                       </DropdownMenuItem>
                     </DropdownMenuContent>

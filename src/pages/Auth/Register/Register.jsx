@@ -53,6 +53,7 @@ const Register = () => {
             name: data.name,
             email: data.email,
             role: data.role,
+            photo_url: imagePath,
           };
           useAxios.post("/users", user).then((res) => {
             console.log(res.data);

@@ -15,6 +15,7 @@ const GoogleLogin = () => {
         name: res.user.displayName,
         email: res.user.email,
         role: "user",
+        photo_url: res.user.photoURL,
       };
       useAxios.post("/users", user).then((res) => {
         console.log(res.data);
