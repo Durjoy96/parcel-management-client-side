@@ -38,9 +38,8 @@ const BookParcel = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
     setLoading(true); //start the spinner on the Book Now Button
-    data.price = calculatedPrice;
-    data.status = "pending";
 
     const date = new Date();
     const options = {
@@ -51,6 +50,9 @@ const BookParcel = () => {
     };
 
     data.bookingDate = date.toLocaleDateString(undefined, options);
+    data.price = calculatedPrice;
+    data.status = "pending";
+    data.deliveryMenId = "";
 
     useAxios
       .post("/book-parcel", data)
@@ -87,7 +89,7 @@ const BookParcel = () => {
                 type="name"
                 name="name"
                 {...register("name")}
-                placeholder="name"
+                placeholder="John Doe"
                 defaultValue={user?.displayName}
                 readOnly
               />
@@ -101,7 +103,7 @@ const BookParcel = () => {
                 type="email"
                 name="email"
                 {...register("email")}
-                placeholder="Email"
+                placeholder="johndoe@gmail.com"
                 defaultValue={user?.email}
                 readOnly
               />
@@ -115,7 +117,7 @@ const BookParcel = () => {
                 type="tel"
                 name="phoneNumber"
                 {...register("phoneNumber")}
-                placeholder="Phone Number"
+                placeholder="+1 234 567 8901"
               />
             </div>
             {/* Parcel Type */}
@@ -127,7 +129,7 @@ const BookParcel = () => {
                 type="text"
                 name="type"
                 {...register("type")}
-                placeholder="Parcel Type"
+                placeholder="Electronics, Documents, Fragile Items"
               />
             </div>
             {/* Parcel Weight */}
@@ -139,7 +141,7 @@ const BookParcel = () => {
                 type="number"
                 name="weight"
                 {...register("weight")}
-                placeholder="Parcel Weight"
+                placeholder="2.5"
                 onChange={priceHandler}
               />
             </div>
@@ -152,7 +154,7 @@ const BookParcel = () => {
                 type="text"
                 name="receiversName"
                 {...register("receiversName")}
-                placeholder="Receiver’s Name"
+                placeholder="Jane Smith"
               />
             </div>
             {/* Receiver's Phone Number */}
@@ -164,7 +166,7 @@ const BookParcel = () => {
                 type="text"
                 name="phoneNumber"
                 {...register("phoneNumber")}
-                placeholder="Receiver's Phone Number"
+                placeholder="+1 987 654 3210"
               />
             </div>
             {/* Parcel Delivery Address */}
@@ -176,7 +178,7 @@ const BookParcel = () => {
                 type="text"
                 name="deliveryAddress"
                 {...register("deliveryAddress")}
-                placeholder="Parcel Delivery Address"
+                placeholder="123 Main Street, Apt 4B, New York, NY 10001"
               />
             </div>
             {/* Requested Delivery Date */}
@@ -188,7 +190,7 @@ const BookParcel = () => {
                 type="date"
                 name="deliveryDate"
                 {...register("deliveryDate")}
-                placeholder="Requested Delivery Date"
+                placeholder="2025-01-20"
               />
             </div>
             {/* Delivery Address Latitude */}
@@ -200,7 +202,7 @@ const BookParcel = () => {
                 type="text"
                 name="latitude"
                 {...register("latitude")}
-                placeholder="Delivery Address Latitude"
+                placeholder="40.712776"
               />
             </div>
             {/* Delivery Address longitude */}
@@ -212,7 +214,7 @@ const BookParcel = () => {
                 type="text"
                 name="longitude"
                 {...register("longitude")}
-                placeholder="Delivery Address Longitude"
+                placeholder="-74.005974"
               />
             </div>
           </div>

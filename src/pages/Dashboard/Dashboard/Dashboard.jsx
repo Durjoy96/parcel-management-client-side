@@ -62,7 +62,7 @@ const items = [
   },
   {
     title: "My Parcels",
-    url: "my-parcel",
+    url: "my-parcels",
     icon: Package2,
     role: "user",
   },
@@ -119,7 +119,7 @@ const Dashboard = () => {
       {roleBasedItems && roleBasedItems.length > 0 && (
         <Navigate to={`/dashboard/${roleBasedItems[0].url}`} replace />
       )}
-      <section className="bg-base-200 grid grid-cols-[.1fr_1fr_.02fr] items-start gap-6 md:gap-10 lg:gap-12">
+      <section className="bg-base-200 w-full grid grid-cols-[.1fr_1fr_.02fr] items-start gap-6 md:gap-10 lg:gap-12">
         <SidebarProvider>
           <Sidebar>
             <SidebarHeader>
