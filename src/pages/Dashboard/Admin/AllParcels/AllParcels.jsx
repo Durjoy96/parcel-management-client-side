@@ -78,7 +78,10 @@ const AllParcels = () => {
   return (
     <>
       <div>
-        <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end">
+        <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
+          All Parcels
+        </h2>
+        <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end mt-8">
           <div className="grid gap-2">
             <Label className="text-left">From</Label>
             <Input

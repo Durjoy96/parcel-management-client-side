@@ -13,6 +13,7 @@ import MyProfile from "@/pages/Dashboard/Users/MyProfile/MyProfile";
 import AdminRoute from "@/private/AdminRoute";
 import Statistics from "@/pages/Dashboard/Admin/Statistics/Statistics";
 import AllParcels from "@/pages/Dashboard/Admin/AllParcels/AllParcels";
+import AllUsers from "@/pages/Dashboard/Admin/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,14 @@ export const router = createBrowserRouter([
             element: (
               <AdminRoute>
                 <AllParcels />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "all-users",
+            element: (
+              <AdminRoute>
+                <AllUsers />
               </AdminRoute>
             ),
           },

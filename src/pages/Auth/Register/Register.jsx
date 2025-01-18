@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +15,13 @@ import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AxiosPublic from "@/hooks/AxiosPublic/AxiosPublic";
+import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 
 const Register = () => {
-  const [imagePath, setImagePath] = useState("");
-  const { createUser, updateUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const { createUser, updateUser, logOut } = useContext(AuthContext);
   const useAxios = AxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,43 +30,51 @@ const Register = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    //get image url
+  const uploadImage = async (image) => {
     const formData = new FormData();
-    formData.append("image", data.imageURL[0]);
-    fetch(
+    formData.append("image", image);
+    const response = await fetch(
       `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbbApiKey}`,
       {
         method: "POST",
         body: formData,
       }
-    )
-      .then((res) => res.json())
-      .then((data) => setImagePath(() => data.data.display_url));
-
-    if (imagePath) {
-      createUser(data.email, data.password)
-        .then(() => {
-          console.log(imagePath);
-          updateUser(data.name, imagePath);
-          reset();
-          // console.log(res);
-          const user = {
-            name: data.name,
-            email: data.email,
-            role: data.role,
-            photo_url: imagePath,
-          };
-          useAxios.post("/users", user).then((res) => {
-            console.log(res.data);
-            toast.success("Registration Successful!");
-          });
-        })
-        .catch((error) => {
-          toast.error(error.message);
-        });
+    );
+    const data = await response.json();
+    if (data.success) {
+      return data.data.display_url;
     }
   };
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    const imageUrl = await uploadImage(data.imageURL[0]);
+    await createUser(data.email, data.password);
+    await updateUser(data.name, imageUrl);
+    reset();
+
+    const user = {
+      name: data.name,
+      email: data.email,
+      role: data.role,
+      photo_url: imageUrl,
+    };
+
+    await useAxios
+      .post("/users", user)
+      .then(() => {
+        toast.success("Registration Successful. Please log in now!");
+        setLoading(false);
+        logOut();
+        navigate("/login");
+      })
+      .catch((error) => toast.error(error.message));
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <div className="main-container mt-12 md:mt-20 flex justify-center">
