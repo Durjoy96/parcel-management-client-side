@@ -86,13 +86,17 @@ const MyParcels = () => {
                   {parcel?.deliveryDate}
                 </TableCell>
                 <TableCell className="font-medium">
-                  {parcel?.deliveryDate}
+                  {parcel?.approximateDeliveryDate || (
+                    <span className="text-primary">NaN</span>
+                  )}
                 </TableCell>
                 <TableCell className="font-medium">
                   {parcel?.bookingDate}
                 </TableCell>
                 <TableCell className="font-medium">
-                  {parcel?.deliveryMenId}
+                  {parcel?.deliveryMenId || (
+                    <span className="text-primary">NaN</span>
+                  )}
                 </TableCell>
                 <TableCell className="font-medium">{parcel?.status}</TableCell>
                 <TableCell>

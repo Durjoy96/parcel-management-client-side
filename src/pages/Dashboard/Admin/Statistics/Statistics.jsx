@@ -47,7 +47,7 @@ const Statistics = () => {
   return (
     <div className="app">
       <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
-        Parcel Statistics
+        Statistics
       </h2>
       <div className="mixed-chart mt-6">
         <Chart
