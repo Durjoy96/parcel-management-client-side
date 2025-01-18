@@ -51,7 +51,7 @@ const MyParcels = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        useAxios.patch(`/parcel?id=${id}`, {}).then((res) => {
+        useAxios.patch(`/parcel?id=${id}&status=Canceled`, {}).then((res) => {
           Swal.fire({
             title: "Canceled!",
             text: "Your parcel has been canceled.",

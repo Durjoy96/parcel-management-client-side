@@ -14,6 +14,7 @@ import AdminRoute from "@/private/AdminRoute";
 import Statistics from "@/pages/Dashboard/Admin/Statistics/Statistics";
 import AllParcels from "@/pages/Dashboard/Admin/AllParcels/AllParcels";
 import AllUsers from "@/pages/Dashboard/Admin/AllUsers/AllUsers";
+import MyDeliveryList from "@/pages/Dashboard/deliveryMen/MyDeliveryList/MyDeliveryList";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,14 @@ export const router = createBrowserRouter([
               </AdminRoute>
             ),
             loader: () => fetch("http://localhost:5000/users-count"),
+          },
+          {
+            path: "my-delivery-list",
+            element: (
+              <PrivateRoute>
+                <MyDeliveryList />
+              </PrivateRoute>
+            ),
           },
         ],
       },
