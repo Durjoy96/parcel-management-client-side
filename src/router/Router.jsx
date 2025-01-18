@@ -96,6 +96,7 @@ export const router = createBrowserRouter([
                 <AllUsers />
               </AdminRoute>
             ),
+            loader: () => fetch("http://localhost:5000/users-count"),
           },
         ],
       },

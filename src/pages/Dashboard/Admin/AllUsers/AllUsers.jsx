@@ -11,36 +11,41 @@ import {
 } from "@/components/ui/table";
 import AxiosSecure from "@/hooks/AxiosSecure/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
 
 const AllUsers = () => {
   const useAxios = AxiosSecure();
-  const {
-    data: users = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["all-users"],
-    queryFn: async () => {
-      const res = await useAxios.get(`/all-users`);
-      return res.data;
-    },
-  });
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  const { count } = useLoaderData();
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [refetch, setRefetch] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const numberOfPage = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPage).keys()];
 
   const roleHandler = (id, name, role) => {
     useAxios
       .patch(`/user?id=${id}&role=${role}`)
       .then(() => {
-        refetch();
         toast.success(`${name} updated as a ${role}!`);
+        setRefetch((prev) => !prev);
       })
       .catch((error) => toast.error(error.message));
   };
 
+  useEffect(() => {
+    useAxios
+      .get(`/pagination?page=${currentPage}&size=${itemsPerPage}`)
+      .then((res) => setUsers(res.data));
+    setLoading(false);
+  }, [currentPage, refetch]);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
   return (
     <>
       <div>
@@ -49,7 +54,6 @@ const AllUsers = () => {
         </h2>
         <div>
           <Table>
-            <TableCaption>A list of your users.</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>User Name</TableHead>
@@ -88,6 +92,33 @@ const AllUsers = () => {
               ))}
             </TableBody>
           </Table>
+          <div className="mt-8 flex gap-6">
+            <Button
+              disabled={currentPage === 1 && true}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              Previous
+            </Button>
+            {pages.map((page) => (
+              <Button
+                variant="outline"
+                onClick={() => setCurrentPage(page + 1)}
+                className={`${
+                  currentPage === page + 1 &&
+                  "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
+                }`}
+                key={page}
+              >
+                {page + 1}
+              </Button>
+            ))}
+            <Button
+              disabled={currentPage === numberOfPage && true}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next
+            </Button>
+          </div>
         </div>
       </div>
     </>
