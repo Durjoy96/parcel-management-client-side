@@ -16,7 +16,7 @@ const AllDeliveryMen = () => {
   const { data: deliveryMen = [], isLoading } = useQuery({
     queryKey: ["deliveryMen"],
     queryFn: async () => {
-      const res = await useAxios.get("/deliveryMen");
+      const res = await useAxios.get("/delivery-men");
       return res.data;
     },
   });
@@ -40,17 +40,19 @@ const AllDeliveryMen = () => {
               <TableRow>
                 <TableHead>Delivery Men Name</TableHead>
                 <TableHead>Phone Number</TableHead>
-                <TableHead>Parcels delivered</TableHead>o
-                <TableHead>Average review</TableHead>
+                <TableHead>Parcels delivered</TableHead>
+                <TableHead>Average Rating</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
-              </TableRow>
+              {deliveryMen.map((deliveryMan) => (
+                <TableRow key={deliveryMan?._id}>
+                  <TableCell>{deliveryMan?.name}</TableCell>
+                  <TableCell>{deliveryMan?.phone_number}</TableCell>
+                  <TableCell>{deliveryMan?.deliveredCount}</TableCell>
+                  <TableCell>{deliveryMan?.averageRating}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

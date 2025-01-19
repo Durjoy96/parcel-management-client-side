@@ -33,7 +33,7 @@ const AllParcels = () => {
   const [parcels, setParcels] = useState([]);
   const [formDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["parcels"],
     queryFn: async () => {
       const res = await useAxios.get(`/parcels`);
@@ -66,7 +66,10 @@ const AllParcels = () => {
     };
     useAxios
       .put(`/manage?id=${id}`, info)
-      .then(() => toast.success("Assigned Successfully!"))
+      .then(() => {
+        toast.success("Assigned Successfully!");
+        refetch();
+      })
       .catch((error) => toast.error(error.message));
   };
 
