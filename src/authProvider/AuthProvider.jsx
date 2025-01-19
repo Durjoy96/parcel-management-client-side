@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState();
+  const [userDBId, setUserDBId] = useState();
   const useAxios = AxiosPublic();
 
   const createUser = (email, password) => {
@@ -49,7 +50,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
-        console.log(currentUser); 
+        console.log(currentUser);
       } else {
         setUser(null);
         setLoading(false);
@@ -67,6 +68,7 @@ const AuthProvider = ({ children }) => {
       const res = await useAxios.get(`/user?email=${user.email}`);
       console.log(res.data.role);
       setRole(res.data.role);
+      setUserDBId(res.data._id);
       return res.data;
     },
   });
@@ -80,6 +82,7 @@ const AuthProvider = ({ children }) => {
     signInWithPassword,
     logOut,
     role,
+    userDBId,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

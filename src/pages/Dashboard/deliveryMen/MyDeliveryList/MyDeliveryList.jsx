@@ -59,6 +59,9 @@ const MyDeliveryList = () => {
   return (
     <>
       <div>
+        <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
+          All Delivery List
+        </h2>
         <Table>
           <TableHeader>
             <TableRow>
