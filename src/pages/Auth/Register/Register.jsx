@@ -58,6 +58,7 @@ const Register = () => {
       email: data.email,
       role: data.role,
       photo_url: imageUrl,
+      phone_number: data.phoneNumber,
     };
 
     await useAxios
@@ -165,6 +166,21 @@ const Register = () => {
                   className="w-full px-3 py-2 border rounded-md dark:border-none dark:bg-[#4e4e4e] dark:text-white/60"
                 />
                 {errors.email && (
+                  <span className="text-red-500">This field is required</span>
+                )}
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="phoneNumber" className="block text-sm">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  {...register("phoneNumber", { required: true })}
+                  placeholder="+1 234 567 8901"
+                  className="w-full px-3 py-2 border rounded-md dark:border-none dark:bg-[#4e4e4e] dark:text-white/60"
+                />
+                {errors.phoneNumber && (
                   <span className="text-red-500">This field is required</span>
                 )}
               </div>
