@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -17,23 +16,17 @@ import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 
 const MyDeliveryList = () => {
   const useAxios = AxiosSecure();
-  const { user } = useContext(AuthContext);
-  const [userId, setUserId] = useState("");
+  const { userDBId } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [refetch, setRefetch] = useState(true);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    useAxios.get(`/user?email=${user?.email}`).then((res) => {
-      setUserId(res.data._id);
-    });
-  }, []);
 
   useEffect(() => {
-    useAxios.get(`/delivery-list?id=${userId}`).then((res) => {
+    useAxios.get(`/delivery-list?id=${userDBId}`).then((res) => {
       setData(res.data);
       setLoading(false);
     });
-  }, [userId, refetch]);
+  }, [userDBId, refetch]);
 
   const statusHandler = (id, status) => {
     Swal.fire({
@@ -67,7 +60,7 @@ const MyDeliveryList = () => {
     <>
       <div>
         <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
-          All Delivery List
+          My Delivery List
         </h2>
         <Table>
           <TableHeader>
