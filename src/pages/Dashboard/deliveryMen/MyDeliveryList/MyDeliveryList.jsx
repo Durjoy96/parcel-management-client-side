@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 
 const MyDeliveryList = () => {
   const useAxios = AxiosSecure();
@@ -20,6 +21,7 @@ const MyDeliveryList = () => {
   const [userId, setUserId] = useState("");
   const [data, setData] = useState([]);
   const [refetch, setRefetch] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     useAxios.get(`/user?email=${user?.email}`).then((res) => {
       setUserId(res.data._id);
@@ -27,9 +29,10 @@ const MyDeliveryList = () => {
   }, []);
 
   useEffect(() => {
-    useAxios
-      .get(`/delivery-list?id=${userId}`)
-      .then((res) => setData(res.data));
+    useAxios.get(`/delivery-list?id=${userId}`).then((res) => {
+      setData(res.data);
+      setLoading(false);
+    });
   }, [userId, refetch]);
 
   const statusHandler = (id, status) => {
@@ -55,6 +58,10 @@ const MyDeliveryList = () => {
       }
     });
   };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
