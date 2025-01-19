@@ -16,6 +16,7 @@ import AllParcels from "@/pages/Dashboard/Admin/AllParcels/AllParcels";
 import AllUsers from "@/pages/Dashboard/Admin/AllUsers/AllUsers";
 import MyDeliveryList from "@/pages/Dashboard/deliveryMen/MyDeliveryList/MyDeliveryList";
 import MyReviews from "@/pages/Dashboard/deliveryMen/MyReviews/MyReviews";
+import AllDeliveryMen from "@/pages/Dashboard/Admin/AllDeliveryMen/AllDeliveryMen";
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,14 @@ export const router = createBrowserRouter([
               </AdminRoute>
             ),
             loader: () => fetch("http://localhost:5000/users-count"),
+          },
+          {
+            path: "all-delivery-men",
+            element: (
+              <AdminRoute>
+                <AllDeliveryMen />
+              </AdminRoute>
+            ),
           },
           {
             path: "my-delivery-list",

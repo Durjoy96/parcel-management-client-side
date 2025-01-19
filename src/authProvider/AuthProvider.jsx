@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     queryKey: ["userRole", user?.email],
     queryFn: async () => {
       const res = await useAxios.get(`/user?email=${user.email}`);
-      console.log(res.data.role);
+      console.log(res.data);
       setRole(res.data.role);
       setUserDBId(res.data._id);
       return res.data;

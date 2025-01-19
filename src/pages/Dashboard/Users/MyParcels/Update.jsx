@@ -133,6 +133,7 @@ const Update = () => {
               <Input
                 type="number"
                 name="weight"
+                step="0.01"
                 placeholder="2.5"
                 onChange={priceHandler}
                 defaultValue={parcel?.weight}

@@ -51,7 +51,6 @@ const BookParcel = () => {
     data.bookingDate = date.toLocaleDateString(undefined, options);
     data.price = calculatedPrice;
     data.status = "pending";
-    data.deliveryMenId = "";
 
     useAxios
       .post("/book-parcel", data)
@@ -139,6 +138,7 @@ const BookParcel = () => {
               <Input
                 type="number"
                 name="weight"
+                step="0.01"
                 {...register("weight")}
                 placeholder="2.5"
                 onChange={priceHandler}
@@ -158,7 +158,10 @@ const BookParcel = () => {
             </div>
             {/* Receiver's Phone Number */}
             <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="ReceiversPhoneNumber" className="text-base-content">
+              <Label
+                htmlFor="ReceiversPhoneNumber"
+                className="text-base-content"
+              >
                 Receiver's Phone Number
               </Label>
               <Input
