@@ -81,12 +81,21 @@ const MyParcels = () => {
 
   const formHandler = (e) => {
     e.preventDefault();
+    const date = new Date();
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
     const data = {
       name: e.target.name.value,
       photoURL: e.target.photoURL.value,
       rating: Number(e.target.rating.value),
       feedback: e.target.feedback.value,
       deliveryMenId: e.target.deliveryMenId.value,
+      reviewDate: date.toLocaleDateString(undefined, options),
     };
     useAxios.post(`/review`, data).then(() => {
       toast.success("Review Added Successfully!");
