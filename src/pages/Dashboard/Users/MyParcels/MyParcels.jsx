@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import AxiosSecure from "@/hooks/AxiosSecure/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,14 +19,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { Ellipsis } from "lucide-react";
 import { Link } from "react-router-dom";
 import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 import Swal from "sweetalert2";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
+
 const MyParcels = () => {
   const useAxios = AxiosSecure();
   const { user } = useContext(AuthContext);
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [selectedParcel, setSelectedParcel] = useState(null);
+  console.log(selectedParcel);
   const { data: parcels = [], isLoading } = useQuery({
     queryKey: ["parcels", user?.email],
     queryFn: async () => {
@@ -59,6 +76,21 @@ const MyParcels = () => {
           });
         });
       }
+    });
+  };
+
+  const formHandler = (e) => {
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value,
+      photoURL: e.target.photoURL.value,
+      rating: Number(e.target.rating.value),
+      feedback: e.target.feedback.value,
+      deliveryMenId: e.target.deliveryMenId.value,
+    };
+    useAxios.post(`/review`, data).then(() => {
+      toast.success("Review Added Successfully!");
+      setIsReviewOpen(false);
     });
   };
 
@@ -110,7 +142,14 @@ const MyParcels = () => {
                       <DropdownMenuItem disabled={parcel?.status !== "pending"}>
                         <Link to={`update/${parcel?._id}`}>Update</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Review</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setIsReviewOpen(true);
+                          setSelectedParcel(parcel);
+                        }}
+                      >
+                        Review
+                      </DropdownMenuItem>
                       <DropdownMenuItem>Pay</DropdownMenuItem>
                       <DropdownMenuItem
                         disabled={parcel?.status !== "pending"}
@@ -126,6 +165,63 @@ const MyParcels = () => {
             ))}
           </TableBody>
         </Table>
+        <Dialog open={isReviewOpen} onOpenChange={setIsReviewOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add a Review</DialogTitle>
+              <DialogDescription>
+                <form onSubmit={formHandler} className="grid gap-4 mt-4">
+                  <div>
+                    <Label className="text-base-content">Name</Label>
+                    <Input
+                      type="text"
+                      name="name"
+                      defaultValue={user?.displayName}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-base-content">Photo URL</Label>
+                    <Input
+                      type="text"
+                      name="photoURL"
+                      defaultValue={user?.photoURL}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-base-content">Delivery Men ID</Label>
+                    <Input
+                      type="text"
+                      name="deliveryMenId"
+                      defaultValue={selectedParcel?.deliveryMenId}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-base-content">Rating out of 5</Label>
+                    <Input
+                      type="number"
+                      min="0"
+                      max="5"
+                      name="rating"
+                      placeholder="4.5"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-base-content">Feedback</Label>
+                    <Input
+                      type="text"
+                      name="feedback"
+                      placeholder="Your Text"
+                    />
+                  </div>
+                  <Button className="mt-6">Submit</Button>
+                </form>
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
