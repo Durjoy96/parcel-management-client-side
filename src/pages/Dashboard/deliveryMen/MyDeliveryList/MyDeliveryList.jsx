@@ -9,10 +9,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Map from "./Map/Map";
 
 const MyDeliveryList = () => {
   const useAxios = AxiosSecure();
@@ -86,7 +97,22 @@ const MyDeliveryList = () => {
                 <TableCell>{parcel.ReceiversPhoneNumber}</TableCell>
                 <TableCell>{parcel.deliveryAddress}</TableCell>
                 <TableCell className="flex gap-4">
-                  <Button variant="outline">View Location</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">View Location</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[525px]">
+                      <DialogHeader>
+                        <DialogTitle>Location</DialogTitle>
+                      </DialogHeader>
+                      <div className="w-full h-96">
+                        <Map
+                          latitude={Number(parcel?.latitude)}
+                          longitude={Number(parcel?.longitude)}
+                        />
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                   <Button
                     variant="outline"
                     onClick={() => statusHandler(parcel._id, "Delivered")}
