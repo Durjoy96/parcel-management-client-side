@@ -1,5 +1,6 @@
 import { auth } from "@/firebase/firebase.config";
 import AxiosPublic from "@/hooks/AxiosPublic/AxiosPublic";
+import AxiosSecure from "@/hooks/AxiosSecure/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import {
   createUserWithEmailAndPassword,
@@ -51,9 +52,16 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         setLoading(false);
         console.log(currentUser);
+        const userInfo = { email: currentUser.email };
+        useAxios.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
       } else {
         setUser(null);
         setLoading(false);
+        localStorage.removeItem("access-token");
       }
     });
     return () => {
@@ -65,7 +73,11 @@ const AuthProvider = ({ children }) => {
     enabled: !!user?.email,
     queryKey: ["userRole", user?.email],
     queryFn: async () => {
-      const res = await useAxios.get(`/user?email=${user.email}`);
+      const res = await useAxios.get(`/user?email=${user.email}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       console.log(res.data);
       setRole(res.data.role);
       setUserDBId(res.data._id);

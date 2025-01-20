@@ -1,3 +1,4 @@
+import { AuthContext } from "@/authProvider/AuthProvider";
 import LoadingScreen from "@/components/custom/Loading/LoadingScreen";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,12 +12,13 @@ import {
 } from "@/components/ui/table";
 import AxiosSecure from "@/hooks/AxiosSecure/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
 const AllUsers = () => {
   const useAxios = AxiosSecure();
+  const { user } = useContext(AuthContext);
   const { count } = useLoaderData();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,14 @@ const AllUsers = () => {
 
   useEffect(() => {
     useAxios
-      .get(`/pagination?page=${currentPage}&size=${itemsPerPage}`)
+      .get(
+        `/pagination?page=${currentPage}&size=${itemsPerPage}&email=${user.email}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      )
       .then((res) => setUsers(res.data));
     setLoading(false);
   }, [currentPage, refetch]);
