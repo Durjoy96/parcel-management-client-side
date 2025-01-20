@@ -37,6 +37,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
 
 import {
   Select,
@@ -121,6 +122,18 @@ const MyParcels = () => {
     }
   };
 
+  const makePayment = async (parcel) => {
+    const stripe = await loadStripe(import.meta.env.VITE_stripePublicKey);
+    const response = await useAxios.post("/create-checkout-session", parcel);
+    const session = response.data;
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      console.log(result.error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -192,7 +205,9 @@ const MyParcels = () => {
                       >
                         Review
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Pay</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => makePayment(parcel)}>
+                        Pay
+                      </DropdownMenuItem>
                       <DropdownMenuItem
                         disabled={parcel?.status !== "pending"}
                         onClick={() => cancelBtnHandler(parcel?._id)}

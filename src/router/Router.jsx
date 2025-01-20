@@ -17,6 +17,7 @@ import AllUsers from "@/pages/Dashboard/Admin/AllUsers/AllUsers";
 import MyDeliveryList from "@/pages/Dashboard/deliveryMen/MyDeliveryList/MyDeliveryList";
 import MyReviews from "@/pages/Dashboard/deliveryMen/MyReviews/MyReviews";
 import AllDeliveryMen from "@/pages/Dashboard/Admin/AllDeliveryMen/AllDeliveryMen";
+import Success from "@/pages/Dashboard/Users/Payment/Success/Success";
 
 export const router = createBrowserRouter([
   {
@@ -126,6 +127,10 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "/payment/success",
+        element: <Success />,
       },
     ],
   },
