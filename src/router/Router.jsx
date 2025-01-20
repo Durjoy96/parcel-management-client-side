@@ -100,7 +100,10 @@ export const router = createBrowserRouter([
                 <AllUsers />
               </AdminRoute>
             ),
-            loader: () => fetch("http://localhost:5000/users-count"),
+            loader: () =>
+              fetch(
+                "https://percel-management-server-chi.vercel.app/users-count"
+              ),
           },
           {
             path: "all-delivery-men",

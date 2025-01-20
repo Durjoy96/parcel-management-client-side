@@ -21,7 +21,7 @@ const AllDeliveryMen = () => {
     },
   });
 
-  console.log(deliveryMen);
+  // console.log(deliveryMen);
 
   if (isLoading) {
     return <LoadingScreen />;

@@ -18,7 +18,7 @@ const GoogleLogin = () => {
         photo_url: res.user.photoURL,
       };
       useAxios.post("/users", user).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       });
     });
   };

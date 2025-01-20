@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser(currentUser);
         setLoading(false);
-        console.log(currentUser);
+        // console.log(currentUser);
         const userInfo = { email: currentUser.email };
         useAxios.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
       setRole(res.data.role);
       setUserDBId(res.data._id);
       return res.data;

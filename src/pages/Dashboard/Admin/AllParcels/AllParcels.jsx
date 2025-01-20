@@ -49,7 +49,7 @@ const AllParcels = () => {
     queryKey: ["deliveryMen"],
     queryFn: async () => {
       const res = await useAxios.get(`/users`);
-      console.log(res.data);
+      // console.log(res.data);
       const filter = res.data.filter((user) => user.role === "deliveryMen");
       return filter;
     },

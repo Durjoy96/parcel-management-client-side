@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const Map = ({ latitude, longitude }) => {
-  console.log([latitude, longitude]);
+//   console.log([latitude, longitude]);
   useEffect(() => {
     // Fix for missing marker icon (leaflet bug)
     const defaultIcon = new L.Icon({

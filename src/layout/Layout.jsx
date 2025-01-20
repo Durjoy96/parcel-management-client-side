@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   return (
     <>
       {location.pathname.includes("/dashboard") ? (

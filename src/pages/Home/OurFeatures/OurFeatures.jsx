@@ -9,11 +9,11 @@ const OurFeatures = () => {
     queryKey: ["counts"],
     queryFn: async () => {
       const res = await useAxios.get(`/total-count`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
-  console.log(counts);
+  // console.log(counts);
   const features = [
     {
       icon: <Shield />,

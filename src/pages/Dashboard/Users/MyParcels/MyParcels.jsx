@@ -130,7 +130,7 @@ const MyParcels = () => {
       sessionId: session.id,
     });
     if (result.error) {
-      console.log(result.error);
+      // console.log(result.error);
     }
   };
 

@@ -21,7 +21,7 @@ const Update = () => {
     queryKey: ["parcel", id],
     queryFn: async () => {
       const res = await useAxios.get(`/parcels?id=${id}`);
-      console.log("update page:", res.data);
+      // console.log("update page:", res.data);
       setCalculatedPrice(res.data[0].price);
       return res.data[0];
     },
@@ -42,7 +42,7 @@ const Update = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
     const form = e.target;
     const data = {
       name: form.name.value,

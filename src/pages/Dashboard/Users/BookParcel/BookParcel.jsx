@@ -36,7 +36,7 @@ const BookParcel = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
 
     setLoading(true); //start the spinner on the Book Now Button
 
