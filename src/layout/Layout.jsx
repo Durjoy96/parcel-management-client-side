@@ -17,7 +17,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {location.pathname.includes("/dashboard") ? <> </> : <Footer />}
     </>
   );
 };

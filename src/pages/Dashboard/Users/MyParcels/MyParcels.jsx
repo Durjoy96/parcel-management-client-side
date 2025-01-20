@@ -38,17 +38,26 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 const MyParcels = () => {
   const useAxios = AxiosSecure();
   const { user } = useContext(AuthContext);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [selectedParcel, setSelectedParcel] = useState(null);
-  console.log(selectedParcel);
-  const { data: parcels = [], isLoading } = useQuery({
+  const [parcels, setParcels] = useState([]);
+
+  const { data, isLoading } = useQuery({
     queryKey: ["parcels", user?.email],
     queryFn: async () => {
       const res = await useAxios.get(`/parcels?email=${user.email}`);
-      console.log(res.data);
+      setParcels(res.data);
       return res.data;
     },
   });
@@ -103,9 +112,36 @@ const MyParcels = () => {
     });
   };
 
+  const sortHandler = (value) => {
+    console.log(value);
+    if (value !== "All") {
+      const sorted = parcels.filter((parcel) => parcel.status == value);
+      console.log(parcels.status, value);
+      console.log(sorted);
+      setParcels(() => sorted);
+    } else if (value === "All") {
+      setParcels(() => data);
+    }
+  };
+
   return (
     <>
       <div>
+        <div className="flex justify-end mb-4">
+          <Select onValueChange={sortHandler}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Sort By Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All</SelectItem>
+              <SelectItem value="pending">Pending</SelectItem>
+              <SelectItem value="Canceled">Canceled</SelectItem>
+              <SelectItem value="On The Way">On The Way</SelectItem>
+              <SelectItem value="Delivered">Delivered</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         <Table>
           <TableCaption>A list of your parcels.</TableCaption>
           <TableHeader>
