@@ -113,14 +113,11 @@ const MyParcels = () => {
   };
 
   const sortHandler = (value) => {
-    console.log(value);
     if (value !== "All") {
-      const sorted = parcels.filter((parcel) => parcel.status == value);
-      console.log(parcels.status, value);
-      console.log(sorted);
-      setParcels(() => sorted);
-    } else if (value === "All") {
-      setParcels(() => data);
+      const sorted = data.filter((parcel) => parcel.status === value);
+      setParcels(sorted);
+    } else {
+      setParcels(data);
     }
   };
 
