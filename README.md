@@ -3,15 +3,18 @@
 An advanced **MERN stack-based Parcel Management System** designed to streamline the process of **booking and delivering parcels**. This system is built with **scalable React components** for a smooth and efficient user experience.
 
 ## 🌍 Live Demo
-🔗 **Live Site:** [Live Site URL](#)  
 
-📧 **Admin Credentials**  
-- **Email:** admin@proyojon.com  
-- **Password:** Admin43211@ 
+🔗 **Live Site:** [Live Site URL](https://parcel-management-a12.web.app/)
+
+📧 **Admin Credentials**
+
+- **Email:** admin@proyojon.com
+- **Password:** Admin43211@
 
 ---
 
 ## 🚀 Technologies Used
+
 - **Frontend:** React, Tailwind CSS, Radix UI
 - **Backend:** Node.js, Express.js, MongoDB
 - **Authentication:** Firebase, JWT
@@ -21,6 +24,7 @@ An advanced **MERN stack-based Parcel Management System** designed to streamline
 ---
 
 ## ✨ Features
+
 ✔ **Responsive Design** – Fully responsive for mobile, tablet, and desktop views, including the dashboard.  
 ✔ **Role-Based Access** – Separate dashboards for Users, Delivery Men, and Admins with conditional rendering.  
 ✔ **Parcel Booking** – Users can book parcels with automated price calculation.  
@@ -34,13 +38,13 @@ An advanced **MERN stack-based Parcel Management System** designed to streamline
 ✔ **Payment Integration** – Secure **Stripe** payment with a success confetti effect.  
 ✔ **Environment Variables** – Sensitive keys stored securely.  
 ✔ **Advanced Search & Filters** – Search and filter parcels by date and status.  
-✔ **Paginated Data Tables** – Enhances performance by displaying data in pages.  
+✔ **Paginated Data Tables** – Enhances performance by displaying data in pages.
 
 ---
 
 ## 📦 Dependencies
+
 ```json
-{
   "@radix-ui/react-alert-dialog": "^1.1.4",
   "@radix-ui/react-avatar": "^1.1.2",
   "@radix-ui/react-dialog": "^1.1.4",
@@ -77,5 +81,75 @@ An advanced **MERN stack-based Parcel Management System** designed to streamline
   "sweetalert2": "^11.15.10",
   "tailwind-merge": "^2.6.0",
   "tailwindcss-animate": "^1.0.7"
-}
 ```
+
+---
+
+# ⚙️ Installation & Setup Guide
+
+Follow these steps to set up and run the **Parcel Management System (Proyojon)** locally on your machine.
+
+---
+
+## 🛠️ Prerequisites
+
+Ensure you have the following installed before proceeding:
+
+- **Node.js** (Recommended: Latest LTS version)
+- **npm** (Node Package Manager) or **yarn**
+- **Git** (for cloning the repository)
+
+---
+
+## 🚀 Step-by-Step Installation
+
+### **1️⃣ Clone the Repository**
+
+Open your terminal and run the following command:
+
+```sh
+git clone https://github.com/Durjoy96/parcel-management-client-side.git
+```
+
+### **2️⃣ Install Dependencies**
+
+Install the required npm packages by running:
+
+```sh
+npm install
+```
+
+### **3️⃣ Set Up Environment Variables**
+
+Create a .env file in the root directory and add the following keys:
+
+```sh
+VITE_apiKey=YOUR_FIREBASE_API_KEY
+VITE_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
+VITE_projectId=YOUR_FIREBASE_PROJECT_ID
+VITE_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
+VITE_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
+VITE_appId=YOUR_FIREBASE_APP_ID
+VITE_imgbbApiKey=YOUR_IMGBB_API_KEY
+VITE_stripePublicKey=YOUR_STRIPE_PUBLIC_KEY
+```
+
+### **4️⃣ Start the Development Server**
+
+```sh
+npm run dev
+```
+
+The application will be available at http://localhost:5173/
+
+---
+
+## 🛠️ Troubleshooting
+- If the frontend does not start, ensure you have installed Node.js and npm.
+- Check that you have set up your .env variables correctly.
+- If Firebase authentication does not work, make sure API keys and Firestore rules are properly configured.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
