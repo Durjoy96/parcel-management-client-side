@@ -7,15 +7,11 @@ import {
 import {
   ChartSpline,
   ChevronUp,
-  Group,
   Home,
   List,
   Package,
   Package2,
-  PackageCheck,
   PackagePlus,
-  Settings,
-  Signal,
   Star,
   Truck,
   User2,
@@ -32,14 +28,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {
-  Link,
-  Navigate,
-  NavLink,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 
 import LogoPng from "../../../assets/images/logo.png";
 import {
@@ -111,7 +100,7 @@ const items = [
 ];
 
 const Dashboard = () => {
-  const { user, role } = useContext(AuthContext);
+  const { user, role, logOut: signOut } = useContext(AuthContext);
   const roleBasedItems = items.filter((item) => item.role === role);
 
   return (
@@ -195,7 +184,12 @@ const Dashboard = () => {
                         <Link>Billing</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <Link>Sign out</Link>
+                        <button
+                          onClick={signOut}
+                          className="hover:text-primary"
+                        >
+                          Sign out
+                        </button>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
