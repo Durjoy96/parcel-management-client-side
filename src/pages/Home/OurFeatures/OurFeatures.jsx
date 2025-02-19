@@ -37,7 +37,7 @@ const OurFeatures = () => {
 
   return (
     <>
-      <div>
+      <div id="features">
         <div className="main-container">
           <h2 className="text-xl md:text-3xl lg:text-4xl text-base-content font-bold">
             Our Features

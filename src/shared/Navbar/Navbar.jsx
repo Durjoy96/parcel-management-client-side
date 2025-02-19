@@ -35,6 +35,18 @@ const Navbar = () => {
               <HomeIcon className="w-4 h-4" />
               Home
             </NavLink>
+            {/* features page */}
+            <a href="#features" className="hover:text-primary cursor-pointer">
+              Features
+            </a>
+            {/* contact page */}
+            <a href="#contact" className="hover:text-primary cursor-pointer">
+              Contact
+            </a>
+            {/* faq page */}
+            <a href="#faq" className="hover:text-primary cursor-pointer">
+              FAQ
+            </a>
             {/* Notification */}
             <div className="hover:text-primary cursor-pointer">
               {" "}
