@@ -4,6 +4,7 @@ import TheTopDeliveryMen from "../TheTopDeliveryMen/TheTopDeliveryMen";
 import Faq from "../FAQ/Faq";
 import TrustedBy from "../TrustedBy/TrustedBy";
 import Testimonial from "../Testimonial/Testimonial";
+import Contact from "../Contact/Contact";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         </div>
         <TheTopDeliveryMen />
         <Testimonial />
+        <Contact />
         <div className="main-container mt-12 md:mt-20 lg:mt-32">
           <Faq />
         </div>
