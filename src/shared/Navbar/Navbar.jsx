@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="main-container py-3 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-1">
             <div className="w-7 lg:w-10">
-              <img src={LogoPng} alt="proyojon" />
+              <img src={LogoPng} alt="proyojon" className="rounded-full" />
             </div>
             <h2 className="text-primary text-lg md:text-xl lg:text-2xl font-bold">
               Proyojon
