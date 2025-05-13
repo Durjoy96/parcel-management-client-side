@@ -29,33 +29,35 @@ const Navbar = () => {
             </h2>
           </Link>
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
-            {/* Home page */}
-            <NavLink to="/" className="flex items-center gap-1">
-              Home
-            </NavLink>
-            {/* Dashboard */}
-            {user && (
-              <NavLink to="/dashboard" className="flex items-center gap-1">
-                Dashboard
+            <div className="items-center gap-3 md:gap-4 lg:gap-6 hidden md:flex">
+              {/* Home page */}
+              <NavLink to="/" className="flex items-center gap-1">
+                Home
               </NavLink>
-            )}
+              {/* Dashboard */}
+              {user && (
+                <NavLink to="/dashboard" className="flex items-center gap-1">
+                  Dashboard
+                </NavLink>
+              )}
 
-            {/* features page */}
-            <a href="#features" className="hover:text-primary cursor-pointer">
-              Features
-            </a>
-            {/* contact page */}
-            <a href="#contact" className="hover:text-primary cursor-pointer">
-              Contact
-            </a>
-            {/* faq page */}
-            <a href="#faq" className="hover:text-primary cursor-pointer">
-              FAQ
-            </a>
-            {/* Notification */}
-            <div className="hover:text-primary cursor-pointer">
-              {" "}
-              <BellDotIcon />
+              {/* features page */}
+              <a href="#features" className="hover:text-primary cursor-pointer">
+                Features
+              </a>
+              {/* contact page */}
+              <a href="#contact" className="hover:text-primary cursor-pointer">
+                Contact
+              </a>
+              {/* faq page */}
+              <a href="#faq" className="hover:text-primary cursor-pointer">
+                FAQ
+              </a>
+              {/* Notification */}
+              <div className="hover:text-primary cursor-pointer">
+                {" "}
+                <BellDotIcon />
+              </div>
             </div>
             {user ? (
               <>
