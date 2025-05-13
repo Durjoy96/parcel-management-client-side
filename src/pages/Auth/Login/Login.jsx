@@ -23,7 +23,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="main-container mt-12 md:mt-20 flex justify-center">
+      <div className="main-container mt-20 md:mt-32 flex justify-center">
         <div className="w-full max-w-md p-4 rounded-md shadow bg-base-100 sm:p-8 dark:bg-[#222222] dark:text-white/90">
           <h2 className="mb-3 text-3xl font-semibold text-center">
             Login to your account
