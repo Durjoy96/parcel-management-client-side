@@ -10,7 +10,7 @@ const Layout = () => {
       {location.pathname.includes("/dashboard") ? (
         <> </>
       ) : (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-base-100/70 backdrop-blur-md">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-base-100/90 backdrop-blur-md">
           <Navbar />
         </header>
       )}
