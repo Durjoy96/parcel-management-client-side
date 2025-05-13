@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "@/authProvider/AuthProvider";
 
 const Login = () => {
+  const [userCredentials, setUserCredentials] = useState(null);
   const { signInWithPassword } = useContext(AuthContext);
   const formHandler = (e) => {
     e.preventDefault();
@@ -46,7 +47,21 @@ const Login = () => {
             <p className="px-3 dark:text-white/60">OR</p>
             <hr className="w-full dark:text-white/60" />
           </div>
-          <form onSubmit={formHandler} className="space-y-8">
+          <div className="flex gap-4">
+            <Button
+              onClick={() => setUserCredentials(() => true)}
+              variant={userCredentials ? "" : "outline"}
+            >
+              User Credentials
+            </Button>
+            <Button
+              onClick={() => setUserCredentials(() => false)}
+              variant={userCredentials === false ? "" : "outline"}
+            >
+              Admin Credentials
+            </Button>
+          </div>
+          <form onSubmit={formHandler} className="space-y-8 mt-4">
             <div className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm">
@@ -57,6 +72,13 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="leroy@jenkins.com"
+                  defaultValue={
+                    userCredentials
+                      ? "test@gmail.com"
+                      : userCredentials != null
+                      ? "admin@proyojon.com"
+                      : ""
+                  }
                   className="w-full px-3 py-2 border rounded-md dark:border-none dark:bg-[#4e4e4e] dark:text-white/60"
                 />
               </div>
@@ -71,6 +93,13 @@ const Login = () => {
                   name="password"
                   id="password"
                   placeholder="*****"
+                  defaultValue={
+                    userCredentials
+                      ? "123456"
+                      : userCredentials != null
+                      ? "Admin43211@"
+                      : ""
+                  }
                   className="w-full px-3 py-2 border rounded-md dark:border-none dark:bg-[#4e4e4e] dark:text-white/60"
                 />
               </div>
