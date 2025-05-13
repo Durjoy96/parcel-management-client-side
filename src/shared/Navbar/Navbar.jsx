@@ -13,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -32,9 +31,15 @@ const Navbar = () => {
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             {/* Home page */}
             <NavLink to="/" className="flex items-center gap-1">
-              <HomeIcon className="w-4 h-4" />
               Home
             </NavLink>
+            {/* Dashboard */}
+            {user && (
+              <NavLink to="/dashboard" className="flex items-center gap-1">
+                Dashboard
+              </NavLink>
+            )}
+
             {/* features page */}
             <a href="#features" className="hover:text-primary cursor-pointer">
               Features
