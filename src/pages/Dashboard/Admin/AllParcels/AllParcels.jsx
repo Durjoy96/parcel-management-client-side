@@ -27,6 +27,13 @@ import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { Search } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const AllParcels = () => {
   const useAxios = AxiosSecure();
@@ -78,32 +85,57 @@ const AllParcels = () => {
     setParcels(res.data);
   };
 
+  const sortHandler = (value) => {
+    if (value !== "All") {
+      const sorted = data.filter((parcel) => parcel.status === value);
+      setParcels(sorted);
+    } else {
+      setParcels(data);
+    }
+  };
+
   return (
     <>
       <div>
         <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
           All Parcels
         </h2>
-        <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end mt-8">
-          <div className="grid gap-2">
-            <Label className="text-left">From</Label>
-            <Input
-              type="date"
-              value={formDate}
-              onChange={(e) => setFromDate(e.target.value)}
-            />
+        <div className="flex items-center justify-between mt-8">
+          <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end">
+            <div className="grid gap-2">
+              <Label className="text-left">From</Label>
+              <Input
+                type="date"
+                value={formDate}
+                onChange={(e) => setFromDate(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label className="text-left">To</Label>
+              <Input
+                type="date"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+              />
+            </div>
+            <Button onClick={searchHandler}>
+              <Search /> Search
+            </Button>
           </div>
-          <div className="grid gap-2">
-            <Label className="text-left">To</Label>
-            <Input
-              type="date"
-              value={toDate}
-              onChange={(e) => setToDate(e.target.value)}
-            />
+          <div>
+            <Select onValueChange={sortHandler}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Sort By Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="Canceled">Canceled</SelectItem>
+                <SelectItem value="On The Way">On The Way</SelectItem>
+                <SelectItem value="Delivered">Delivered</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <Button onClick={searchHandler}>
-            <Search /> Search
-          </Button>
         </div>
         <Table className="mt-8">
           <TableCaption>A list of Parcels.</TableCaption>
