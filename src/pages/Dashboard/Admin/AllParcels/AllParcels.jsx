@@ -100,8 +100,9 @@ const AllParcels = () => {
         <h2 className="text-xl md:text-2xl font-semibold text-primary border-b pb-3">
           All Parcels
         </h2>
-        <div className="flex items-center justify-between mt-8">
-          <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col gap-12 lg:gap-0 lg:flex-row lg:items-center justify-between mt-8">
+          {/* <div className="flex max-w-60 flex-col gap-6 md:flex-row md:items-end"> */}
+          <div className="grid lg:grid-cols-3 gap-6 w-full lg:w-auto lg:items-end">
             <div className="grid gap-2">
               <Label className="text-left">From</Label>
               <Input
@@ -124,7 +125,7 @@ const AllParcels = () => {
           </div>
           <div>
             <Select onValueChange={sortHandler}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[130px] lg:w-[180px]">
                 <SelectValue placeholder="Sort By Status" />
               </SelectTrigger>
               <SelectContent>

@@ -108,7 +108,7 @@ const Dashboard = () => {
       {roleBasedItems && roleBasedItems.length > 0 && (
         <Navigate to={`/dashboard/${roleBasedItems[0].url}`} replace />
       )}
-      <section className="bg-base-200 w-full grid md:grid-cols-[.1fr_1fr_.02fr] items-start md:gap-10 lg:gap-12 px-5 md:px-0">
+      <section className="bg-base-200 w-full min-h-dvh grid md:grid-cols-[.1fr_1fr_.02fr] items-start md:gap-10 lg:gap-12 px-5 md:px-0">
         <SidebarProvider className="min-h-0">
           <Sidebar>
             <SidebarHeader>
