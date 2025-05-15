@@ -101,7 +101,7 @@ const AllUsers = () => {
               ))}
             </TableBody>
           </Table>
-          <div className="mt-8 flex gap-6">
+          <div className="mt-8 flex flex-wrap gap-6">
             <Button
               disabled={currentPage === 1 && true}
               onClick={() => setCurrentPage(currentPage - 1)}
