@@ -108,7 +108,7 @@ const Dashboard = () => {
       {roleBasedItems && roleBasedItems.length > 0 && (
         <Navigate to={`/dashboard/${roleBasedItems[0].url}`} replace />
       )}
-      <section className="bg-base-200 w-full min-h-dvh grid md:grid-cols-[.1fr_1fr_.02fr] items-start md:gap-10 lg:gap-12 px-5 md:px-0">
+      <section className="bg-base-200 w-full min-h-dvh grid md:grid-cols-[.1fr_1fr_.02fr] items-start md:gap-10 lg:gap-12 px-5 md:px-0 pb-12 lg:pb-0">
         <SidebarProvider className="min-h-0">
           <Sidebar>
             <SidebarHeader>
@@ -177,12 +177,6 @@ const Dashboard = () => {
                       side="top"
                       className="w-[--radix-popper-anchor-width] bg-base-100 rounded-lg border shadow-md pl-6 py-6"
                     >
-                      <DropdownMenuItem>
-                        <Link>Account</Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Link>Billing</Link>
-                      </DropdownMenuItem>
                       <DropdownMenuItem>
                         <button
                           onClick={signOut}
