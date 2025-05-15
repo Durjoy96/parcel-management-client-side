@@ -108,8 +108,8 @@ const Dashboard = () => {
       {roleBasedItems && roleBasedItems.length > 0 && (
         <Navigate to={`/dashboard/${roleBasedItems[0].url}`} replace />
       )}
-      <section className="bg-base-200 w-full grid grid-cols-[.1fr_1fr_.02fr] items-start gap-6 md:gap-10 lg:gap-12">
-        <SidebarProvider>
+      <section className="bg-base-200 w-full grid md:grid-cols-[.1fr_1fr_.02fr] items-start md:gap-10 lg:gap-12 px-5 md:px-0">
+        <SidebarProvider className="min-h-0">
           <Sidebar>
             <SidebarHeader>
               <Link to="/" className="flex items-center gap-1">
@@ -199,7 +199,7 @@ const Dashboard = () => {
           </Sidebar>
           <SidebarTrigger />
         </SidebarProvider>
-        <div className="mt-6 md:mt-10 lg:my-12 px-6 pt-6 pb-12 bg-base-100 rounded-lg shadow-md">
+        <div className="mt-6 md:mt-10 lg:my-12 px-6 pt-6 pb-12 bg-base-100 rounded-lg shadow-md max-w-full md:max-w-full overflow-hidden">
           <Outlet />
         </div>
       </section>

@@ -54,8 +54,7 @@ const Statistics = () => {
           options={chartOptions}
           series={seriesData}
           type="bar"
-          width="600"
-          height="400"
+          className="w-[350px] h-[200px] lg:w-[600px] lg:h-[400px]"
         />
       </div>
     </div>
