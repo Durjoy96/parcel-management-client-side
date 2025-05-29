@@ -7,7 +7,7 @@ const Contact = () => {
         <div className="grid max-w-screen-xl mx-auto grid-cols-1 gap-8 rounded-lg md:grid-cols-2 px-5 dark:bg-gray-100 dark:text-gray-800">
           <div className="flex flex-col justify-between">
             <div className="space-y-2">
-              <h2 className="text-4xl font-bold leading-tight lg:text-5xl">
+              <h2 className="text-4xl text-base-content font-bold leading-tight lg:text-5xl">
                 Let's talk!
               </h2>
               <div className="dark:text-gray-600 text-base-content-secondary">

@@ -69,18 +69,23 @@ const OurFeatures = () => {
         </div>
         <div className="mt-6 md:mt-10 lg:mt-32 py-6 md:py-10 lg:py-32 bg-base-200">
           <div className="main-container">
-            <h2 className="text-xl md:text-3xl lg:text-4xl text-base-content font-bold">
-              Some Numbers
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* total parcels card */}
               <div
                 data-aos="zoom-in"
                 className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
               >
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
-                  <CountUp end={counts.parcels} />
-                </h3>
+                {counts.parcels && (
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
+                    <CountUp
+                      enableScrollSpy={true}
+                      scrollSpyDelay={1000}
+                      start={1}
+                      end={counts.parcels}
+                    />
+                    +
+                  </h3>
+                )}
                 <p className="text-base-content-secondary mt-1">
                   Total Parcels
                 </p>
@@ -90,9 +95,18 @@ const OurFeatures = () => {
                 data-aos="zoom-in"
                 className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
               >
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
-                  <CountUp end={counts.delivered} />
-                </h3>
+                {counts.delivered && (
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
+                    <CountUp
+                      enableScrollSpy={true}
+                      scrollSpyDelay={1000}
+                      start={1}
+                      end={counts.delivered}
+                    />
+                    +
+                  </h3>
+                )}
+
                 <p className="text-base-content-secondary mt-1">
                   Total Delivered
                 </p>
@@ -102,9 +116,18 @@ const OurFeatures = () => {
                 data-aos="zoom-in"
                 className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
               >
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
-                  <CountUp end={counts.users} />
-                </h3>
+                {counts.users && (
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
+                    <CountUp
+                      enableScrollSpy={true}
+                      scrollSpyDelay={1000}
+                      start={1}
+                      end={counts.users}
+                    />
+                    +
+                  </h3>
+                )}
+
                 <p className="text-base-content-secondary mt-1">Total Users</p>
               </div>
             </div>

@@ -3,7 +3,7 @@ const Testimonial = () => {
     <>
       <section className="main-container py-12 md:py-20 lg:py-32 dark:bg-gray-100 dark:text-gray-800">
         <div className="container flex flex-col items-center mx-auto mb-12 md:p-10 md:px-12">
-          <h1 className="p-4 text-4xl font-semibold leading-none text-center">
+          <h1 className="p-4 text-base-content text-4xl font-semibold leading-none text-center">
             What our customers are saying about us
           </h1>
         </div>
