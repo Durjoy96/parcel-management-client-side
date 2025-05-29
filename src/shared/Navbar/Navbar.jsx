@@ -53,11 +53,6 @@ const Navbar = () => {
               <a href="#faq" className="hover:text-primary cursor-pointer">
                 FAQ
               </a>
-              {/* Notification */}
-              <div className="hover:text-primary cursor-pointer">
-                {" "}
-                <BellDotIcon />
-              </div>
             </div>
             {user ? (
               <>
