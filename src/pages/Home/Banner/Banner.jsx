@@ -10,7 +10,7 @@ const Banner = () => {
         style={{ backgroundImage: `url(${bgImg})` }}
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-0"></div>
-        <div className="z-10">
+        <div data-aos="fade-up" className="z-10">
           <div className="max-w-xl flex justify-center flex-col gap-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-white/90 font-bold">
               Simplify Deliveries, <br />

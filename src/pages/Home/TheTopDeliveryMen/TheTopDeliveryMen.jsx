@@ -29,7 +29,11 @@ const TheTopDeliveryMen = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           {topDeliveryMen.map((deliveryMan) => (
-            <div key={deliveryMan?._id} className="p-6 bg-base-200 rounded-lg">
+            <div
+              data-aos="fade-up"
+              key={deliveryMan?._id}
+              className="p-6 bg-base-200 rounded-lg"
+            >
               <div>
                 <img
                   className="rounded-full h-32 w-32 block mx-auto"

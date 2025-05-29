@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + React</title>
 </head>
@@ -11,6 +12,14 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration in milliseconds
+      // once: true, // Whether animation should happen only once
+      mirror: false, // Whether elements should animate out while scrolling past them
+    });
+  </script>
 </body>
 
 </html>

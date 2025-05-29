@@ -48,7 +48,11 @@ const OurFeatures = () => {
         </div>
         <div className="main-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {features.map((feature, idx) => (
-            <div key={idx} className="p-6 bg-base-200 rounded-lg">
+            <div
+              data-aos="fade-up"
+              key={idx}
+              className="p-6 bg-base-200 rounded-lg"
+            >
               <div>
                 <div className="text-primary">{feature.icon}</div>
                 <div>
@@ -70,7 +74,10 @@ const OurFeatures = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
               {/* total parcels card */}
-              <div className="p-6 bg-base-100 rounded-lg flex items-center flex-col">
+              <div
+                data-aos="zoom-in"
+                className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
+              >
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
                   <CountUp end={counts.parcels} />
                 </h3>
@@ -79,7 +86,10 @@ const OurFeatures = () => {
                 </p>
               </div>
               {/* total delivered card */}
-              <div className="p-6 bg-base-100 rounded-lg flex items-center flex-col">
+              <div
+                data-aos="zoom-in"
+                className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
+              >
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
                   <CountUp end={counts.delivered} />
                 </h3>
@@ -88,7 +98,10 @@ const OurFeatures = () => {
                 </p>
               </div>
               {/* total users card */}
-              <div className="p-6 bg-base-100 rounded-lg flex items-center flex-col">
+              <div
+                data-aos="zoom-in"
+                className="p-6 bg-base-100 rounded-lg flex items-center flex-col"
+              >
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-primary">
                   <CountUp end={counts.users} />
                 </h3>

@@ -8,7 +8,7 @@ const Testimonial = () => {
           </h1>
         </div>
         <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="flex flex-col shadow-lg">
+          <div data-aos="fade-right" className="flex flex-col shadow-lg">
             <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-50">
               <p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-800">
                 <svg
@@ -45,7 +45,7 @@ const Testimonial = () => {
               <p className="text-sm uppercase">Software Engineer</p>
             </div>
           </div>
-          <div className="flex flex-col shadow-lg">
+          <div data-aos="fade-up" className="flex flex-col shadow-lg">
             <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-50">
               <p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-800">
                 <svg
@@ -82,7 +82,7 @@ const Testimonial = () => {
               <p className="text-sm uppercase">Marketing Manager</p>
             </div>
           </div>
-          <div className="flex flex-col shadow-lg">
+          <div data-aos="fade-left" className="flex flex-col shadow-lg">
             <div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-50">
               <p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-800">
                 <svg
